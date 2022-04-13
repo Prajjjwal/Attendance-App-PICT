@@ -14,7 +14,8 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final newClass = Subjects('', '', '', '');
+    final newClass = new Subjects(null, null, null, null);
+    ;
     return Scaffold(
       appBar: AppBar(
         title: const Text("Attendance: Wednesday, 23 March"),
@@ -36,7 +37,7 @@ class HomePage extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => SelectSubject(subjects: newClass),
+                    builder: (context) => SelectSubject(Class: newClass),
                   ));
             },
           ),
@@ -60,7 +61,7 @@ class HomePage extends StatelessWidget {
                 child: Row(
                   children: <Widget>[
                     Text(
-                      subject.subject,
+                      subject.subject!,
                       style: const TextStyle(fontSize: 30.0),
                     ),
                   ],
@@ -70,7 +71,7 @@ class HomePage extends StatelessWidget {
                 child: Row(
                   children: <Widget>[
                     Text(
-                      subject.timeSlot,
+                      subject.timeSlot!,
                       style: const TextStyle(fontSize: 15.0),
                     )
                   ],
@@ -78,7 +79,7 @@ class HomePage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 4.0),
               child: Row(children: <Widget>[
-                Text(subject.batch, style: const TextStyle(fontSize: 20.0)),
+                Text(subject.batch!, style: const TextStyle(fontSize: 20.0)),
                 const Spacer(),
                 if (subject.type == "TH") ...[
                   const Icon(Icons.book),
@@ -86,7 +87,7 @@ class HomePage extends StatelessWidget {
                   const Icon(Icons.computer_rounded)
                 ],
                 Text(
-                  subject.type,
+                  subject.type!,
                   style: const TextStyle(fontSize: 20.0),
                 )
               ]),
