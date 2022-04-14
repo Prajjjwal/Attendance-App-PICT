@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pict_mis/Subjects.dart';
+import 'package:pict_mis/Class%20Data/select_year.dart';
 import 'Subjects.dart';
-import 'package:pict_mis/select_subject.dart';
+import 'package:pict_mis/Class%20Data/select_subject.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
@@ -37,7 +38,7 @@ class HomePage extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => SelectSubject(Class: newClass),
+                    builder: (context) => SelectYear(Class: newClass),
                   ));
             },
           ),

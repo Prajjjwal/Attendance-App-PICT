@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:pict_mis/Subjects.dart';
 
+import '../class.dart';
+
 class SelectBatch extends StatefulWidget {
   // ignore: non_constant_identifier_names
   final Subjects Class;
+
   const SelectBatch({Key? key, required this.Class}) : super(key: key);
 
   @override
@@ -11,19 +14,14 @@ class SelectBatch extends StatefulWidget {
 }
 
 class _SelectBatchState extends State<SelectBatch> {
-  final items = [
-    'Engineering Mathematics III (EM3)',
-    'Data Structure and Algorithms (DSA)',
-    'Software Engineering (SE)',
-    'Microprocessor (MP)',
-    'Principles of Programming Languages (PPL)',
-    'Data Structure and Algorithms Laboratary (DSAL)',
-    'Microprocessor Laboratary (MPL)',
-    'Engineering Mathermatics Tutorial (TUT)',
-    'Code of Conduct (COC)'
-  ];
-
+  List _items = [];
   String? value;
+
+  @override
+  void initState() {
+    super.initState();
+    _items = BatchDropDown(widget.Class);
+  }
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -31,14 +29,19 @@ class _SelectBatchState extends State<SelectBatch> {
         body: Center(
           child: DropdownButton<String>(
             value: value,
-            hint: const Text("Subjects"),
+            hint: const Text("Batch"),
             icon: const Icon(Icons.arrow_drop_down_outlined),
             elevation: 16,
             underline: Container(
               height: 2,
               color: Colors.deepPurpleAccent,
             ),
-            items: items.map(buildMenuItem).toList(),
+            items: _items.map((batch) {
+              return DropdownMenuItem<String>(
+                child: Text(batch),
+                value: batch,
+              );
+            }).toList(),
             onChanged: (value) => setState(() => this.value = value),
           ),
         ),
@@ -51,7 +54,11 @@ class _SelectBatchState extends State<SelectBatch> {
               // backgroundColor: Color.fromARGB(255, 134, 131, 161),
               child: const Icon(Icons.arrow_right_alt_sharp),
               onPressed: () {
-                widget.Class.subject = value;
+                if (widget.Class.subject == "Microprocessor (MP)") {
+                  print("YEs");
+                } else {
+                  print("Aai java");
+                }
                 // Navigator.push(
                 //     context,
                 //     MaterialPageRoute(

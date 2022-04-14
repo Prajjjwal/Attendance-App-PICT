@@ -4,6 +4,7 @@ class Subjects {
   String? batch;
   String? type;
   String? timeSlot;
+  String? year;
 
   Subjects(this.subject, this.batch, this.type, this.timeSlot);
 }
