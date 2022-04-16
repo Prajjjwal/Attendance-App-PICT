@@ -65,6 +65,20 @@ var batch_pr = [
   'H-4',
 ];
 
+var TH = [
+  '09:00am - 10:00am',
+  '10:00am - 11:00am',
+  '11:15am - 12:15pm',
+  '12:15pm - 1:15pm',
+  '02:00pm - 03:00pm',
+  '03:00pm - 04:00pm'
+];
+var PR = [
+  '09:00am - 11:00am',
+  '11:15am - 1:15pm',
+  '02:00pm - 04:00pm',
+];
+
 var SE_odd = {
   'TH': ['ABC', 'XYZ'],
   'PR': ['ABC', 'XYZ']
@@ -116,7 +130,6 @@ subjectsDropDown(Subjects s) {
 }
 
 BatchDropDown(Subjects s) {
-  List item = [];
   if (s.year == 'SE') {
     if (SE[s.subject] == 'TH') {
       return batch_th.sublist(4, 8);
@@ -126,6 +139,13 @@ BatchDropDown(Subjects s) {
   }
 }
 
+TimeDropDown(Subjects s) {
+  if (s.type == 'TH') {
+    return TH;
+  } else {
+    return PR;
+  }
+}
 // var classes = {
 //   'SE': {
 //     'Even': {

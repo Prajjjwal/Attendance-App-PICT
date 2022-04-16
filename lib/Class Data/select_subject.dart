@@ -86,11 +86,3 @@ class _SelectSubjectState extends State<SelectSubject> {
         ),
       );
 }
-
-// DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem<String>(
-//       value: item,
-//       child: Text(item),
-//     ); 
-
-
-
