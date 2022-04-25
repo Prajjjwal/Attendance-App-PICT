@@ -1,20 +1,20 @@
 import 'package:pict_mis/Subjects.dart';
 
-var SE_even = {
-  'TH': [
-    'Engineering Mathematics III (EM3)',
-    'Data Structure and Algorithms (DSA)',
-    'Software Engineering (SE)',
-    'Microprocessor (MP)',
-    'Principles of Programming Languages (PPL)'
-  ],
-  'PR': [
-    'Data Structure and Algorithms Laboratary (DSAL)',
-    'Microprocessor Laboratary (MPL)',
-    'Engineering Mathermatics Tutorial (TUT)',
-    'Code of Conduct (COC)'
-  ]
-};
+// var SE_even = {
+//   'TH': [
+//     'Engineering Mathematics III (EM3)',
+//     'Data Structure and Algorithms (DSA)',
+//     'Software Engineering (SE)',
+//     'Microprocessor (MP)',
+//     'Principles of Programming Languages (PPL)'
+//   ],
+//   'PR': [
+//     'Data Structure and Algorithms Laboratary (DSAL)',
+//     'Microprocessor Laboratary (MPL)',
+//     'Engineering Mathermatics Tutorial (TUT)',
+//     'Code of Conduct (COC)'
+//   ]
+// };
 
 var SE = {
   'Engineering Mathematics III (EM3)': 'TH',
@@ -107,10 +107,8 @@ var BE_odd = {
 subjectsDropDown(Subjects s) {
   List item = [];
   if (s.year == 'SE') {
-    SE_even.forEach((key, value) {
-      for (var i in value) {
-        item.add(i);
-      }
+    SE.forEach((key, value) {
+      item.add(key);
     });
   } else if (s.year == 'TE') {
     TE_even.forEach((key, value) {
@@ -146,22 +144,19 @@ TimeDropDown(Subjects s) {
     return PR;
   }
 }
+
 // var classes = {
 //   'SE': {
 //     'Even': {
-//       'TH': [
-//         'Engineering Mathematics III (EM3)',
-//         'Data Structure and Algorithms (DSA)',
-//         'Software Engineering (SE)',
-//         'Microprocessor (MP)',
-//         'Principles of Programming Languages (PPL)'
-//       ],
-//       'PR': [
-//         'Data Structure and Algorithms Laboratary (DSAL)',
-//         'Microprocessor Laboratary (MPL)',
-//         'Engineering Mathermatics Tutorial (TUT)',
-//         'Code of Conduct (COC)'
-//       ]
+//       'Engineering Mathematics III (EM3)': 'TH',
+//       'Data Structure and Algorithms (DSA)': 'TH',
+//       'Software Engineering (SE)': 'TH',
+//       'Microprocessor (MP)': 'TH',
+//       'Principles of Programming Languages (PPL)': 'TH',
+//       'Data Structure and Algorithms Laboratary (DSAL)': 'PR',
+//       'Microprocessor Laboratary (MPL)': 'PR',
+//       'Engineering Mathermatics Tutorial (TUT)': 'PR',
+//       'Code of Conduct (COC)': 'PR'
 //     },
 //     'Odd': {'ABC': 'TH', 'XYZ': 'PR'}
 //   },

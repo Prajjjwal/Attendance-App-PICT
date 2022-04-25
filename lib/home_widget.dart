@@ -2,20 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:pict_mis/Subjects.dart';
 import 'package:pict_mis/Class%20Data/select_year.dart';
 import 'Subjects.dart';
-import 'package:pict_mis/Class%20Data/select_subject.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
 
   final List<Subjects> subjectsList = [
-    Subjects("MP", "SE-3", "TH", "09:00am - 10:00am"),
-    Subjects("DSAL", "H4", "PR", "11:15am - 01:15pm"),
-    Subjects("PPL", "SE-1", "TH", "02:00pm - 03:00pm")
+    Subjects("MP", "SE-3", "TH"),
+    Subjects("DSAL", "H4", "PR"),
+    Subjects("PPL", "SE-1", "TH")
   ];
 
   @override
   Widget build(BuildContext context) {
-    final newClass = new Subjects(null, null, null, null);
+    final newClass = new Subjects(null, null, null);
     ;
     return Scaffold(
       appBar: AppBar(
@@ -67,16 +66,16 @@ class HomePage extends StatelessWidget {
                     ),
                   ],
                 )),
-            Padding(
-                padding: const EdgeInsets.only(top: 4.0, bottom: 10.0),
-                child: Row(
-                  children: <Widget>[
-                    Text(
-                      subject.timeSlot!,
-                      style: const TextStyle(fontSize: 15.0),
-                    )
-                  ],
-                )),
+            // Padding(
+            //     padding: const EdgeInsets.only(top: 4.0, bottom: 10.0),
+            //     child: Row(
+            //       children: <Widget>[
+            //         Text(
+            //           subject.timeSlot!,
+            //           style: const TextStyle(fontSize: 15.0),
+            //         )
+            //       ],
+            //     )),
             Padding(
               padding: const EdgeInsets.only(top: 4.0),
               child: Row(children: <Widget>[

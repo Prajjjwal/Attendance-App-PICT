@@ -16,6 +16,7 @@ class TimePicker extends StatefulWidget {
 class _TimePickerState extends State<TimePicker> {
   List _items = [];
   String? value;
+  bool isVisible = false;
 
   @override
   void initState() {
@@ -25,27 +26,32 @@ class _TimePickerState extends State<TimePicker> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(title: const Text("Select Class - Time Slot")),
-        body: Center(
-          child: DropdownButton<String>(
-            value: value,
-            hint: const Text("Time Slot"),
-            icon: const Icon(Icons.arrow_drop_down_outlined),
-            elevation: 16,
-            underline: Container(
-              height: 2,
-              color: Colors.deepPurpleAccent,
-            ),
-            items: _items.map((batch) {
-              return DropdownMenuItem<String>(
-                child: Text(batch),
-                value: batch,
-              );
-            }).toList(),
-            onChanged: (value) => setState(() => this.value = value),
+      appBar: AppBar(title: const Text("Select Class - Time Slot")),
+      body: Center(
+        child: DropdownButton<String>(
+          value: value,
+          hint: const Text("Time Slot"),
+          icon: const Icon(Icons.arrow_drop_down_outlined),
+          elevation: 16,
+          underline: Container(
+            height: 2,
+            color: Colors.deepPurpleAccent,
           ),
+          items: _items.map((batch) {
+            return DropdownMenuItem<String>(
+              child: Text(batch),
+              value: batch,
+            );
+          }).toList(),
+          onChanged: (value) => setState(() {
+            this.value = value;
+            isVisible = true;
+          }),
         ),
-        floatingActionButton: SizedBox(
+      ),
+      floatingActionButton: Visibility(
+        visible: isVisible,
+        child: SizedBox(
           height: 100.0,
           width: 70.0,
           child: FittedBox(
@@ -61,5 +67,5 @@ class _TimePickerState extends State<TimePicker> {
             ),
           ),
         ),
-      );
+      ));
 }

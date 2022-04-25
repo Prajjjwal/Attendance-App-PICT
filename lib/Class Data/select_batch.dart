@@ -17,6 +17,7 @@ class SelectBatch extends StatefulWidget {
 class _SelectBatchState extends State<SelectBatch> {
   List _items = [];
   String? value;
+  bool isVisible = false;
 
   @override
   void initState() {
@@ -26,27 +27,32 @@ class _SelectBatchState extends State<SelectBatch> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(title: const Text("Select Class - Batch")),
-        body: Center(
-          child: DropdownButton<String>(
-            value: value,
-            hint: const Text("Batch"),
-            icon: const Icon(Icons.arrow_drop_down_outlined),
-            elevation: 16,
-            underline: Container(
-              height: 2,
-              color: Colors.deepPurpleAccent,
-            ),
-            items: _items.map((batch) {
-              return DropdownMenuItem<String>(
-                child: Text(batch),
-                value: batch,
-              );
-            }).toList(),
-            onChanged: (value) => setState(() => this.value = value),
+      appBar: AppBar(title: const Text("Select Class - Batch")),
+      body: Center(
+        child: DropdownButton<String>(
+          value: value,
+          hint: const Text("Batch"),
+          icon: const Icon(Icons.arrow_drop_down_outlined),
+          elevation: 16,
+          underline: Container(
+            height: 2,
+            color: Colors.deepPurpleAccent,
           ),
+          items: _items.map((batch) {
+            return DropdownMenuItem<String>(
+              child: Text(batch),
+              value: batch,
+            );
+          }).toList(),
+          onChanged: (value) => setState(() {
+            this.value = value;
+            isVisible = true;
+          }),
         ),
-        floatingActionButton: SizedBox(
+      ),
+      floatingActionButton: Visibility(
+        visible: isVisible,
+        child: SizedBox(
           height: 100.0,
           width: 70.0,
           child: FittedBox(
@@ -63,14 +69,10 @@ class _SelectBatchState extends State<SelectBatch> {
                     widget.Class.type = 'PR';
                   }
                 }
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => TimePicker(Class: widget.Class),
-                    ));
+                Navigator.of(context).popUntil((route) => route.isFirst);
               },
             ),
           ),
         ),
-      );
+      ));
 }

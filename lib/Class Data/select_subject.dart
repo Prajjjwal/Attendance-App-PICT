@@ -13,30 +13,10 @@ class SelectSubject extends StatefulWidget {
 }
 
 class _SelectSubjectState extends State<SelectSubject> {
-  // final items = [
-  //   'Engineering Mathematics III (EM3)',
-  //   'Data Structure and Algorithms (DSA)',
-  //   'Software Engineering (SE)',
-  //   'Microprocessor (MP)',
-  //   'Principles of Programming Languages (PPL)',
-  //   'Data Structure and Algorithms Laboratary (DSAL)',
-  //   'Microprocessor Laboratary (MPL)',
-  //   'Engineering Mathermatics Tutorial (TUT)',
-  //   'Code of Conduct (COC)'
-  // ];
-
   List _items = [];
 
-  // ignore: non_constant_identifier_names
-  // SubjectsDropDown() {
-  //   SE_even.forEach((key, value) {
-  //     for (var i in value) {
-  //       _items.add(i);
-  //     }
-  //   });
-  // }
-
   String? value;
+  bool isVisible = false;
   @override
   void initState() {
     super.initState();
@@ -45,27 +25,32 @@ class _SelectSubjectState extends State<SelectSubject> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(title: const Text("Select Class - Subject")),
-        body: Center(
-          child: DropdownButton<String>(
-            value: value,
-            hint: const Text("Subjects"),
-            icon: const Icon(Icons.arrow_drop_down_outlined),
-            elevation: 16,
-            underline: Container(
-              height: 2,
-              color: Colors.deepPurpleAccent,
-            ),
-            onChanged: (value) => setState(() => this.value = value),
-            items: _items.map((subject) {
-              return DropdownMenuItem<String>(
-                child: Text(subject),
-                value: subject,
-              );
-            }).toList(),
+      appBar: AppBar(title: const Text("Select Class - Subject")),
+      body: Center(
+        child: DropdownButton<String>(
+          value: value,
+          hint: const Text("Subjects"),
+          icon: const Icon(Icons.arrow_drop_down_outlined),
+          elevation: 16,
+          underline: Container(
+            height: 2,
+            color: Colors.deepPurpleAccent,
           ),
+          onChanged: (value) => setState(() {
+            this.value = value;
+            isVisible = true;
+          }),
+          items: _items.map((subject) {
+            return DropdownMenuItem<String>(
+              child: Text(subject),
+              value: subject,
+            );
+          }).toList(),
         ),
-        floatingActionButton: SizedBox(
+      ),
+      floatingActionButton: Visibility(
+        visible: isVisible,
+        child: SizedBox(
           height: 100.0,
           width: 70.0,
           child: FittedBox(
@@ -84,5 +69,5 @@ class _SelectSubjectState extends State<SelectSubject> {
             ),
           ),
         ),
-      );
+      ));
 }

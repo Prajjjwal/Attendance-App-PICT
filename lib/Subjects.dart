@@ -6,5 +6,5 @@ class Subjects {
   String? timeSlot;
   String? year;
 
-  Subjects(this.subject, this.batch, this.type, this.timeSlot);
+  Subjects(this.subject, this.batch, this.type);
 }
