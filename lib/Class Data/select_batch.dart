@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pict_mis/Subjects.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import '../class.dart';
-import 'TimePicker.dart';
 
 class SelectBatch extends StatefulWidget {
   // ignore: non_constant_identifier_names
@@ -18,6 +17,7 @@ class _SelectBatchState extends State<SelectBatch> {
   List _items = [];
   String? value;
   bool isVisible = false;
+  FirebaseFirestore db = FirebaseFirestore.instance;
 
   @override
   void initState() {
@@ -60,7 +60,7 @@ class _SelectBatchState extends State<SelectBatch> {
               elevation: 15.0,
               // backgroundColor: Color.fromARGB(255, 134, 131, 161),
               child: const Icon(Icons.arrow_right_alt_sharp),
-              onPressed: () {
+              onPressed: () async {
                 widget.Class.batch = value;
                 if (widget.Class.year == 'SE') {
                   if (SE[widget.Class.subject] == 'TH') {
@@ -69,6 +69,9 @@ class _SelectBatchState extends State<SelectBatch> {
                     widget.Class.type = 'PR';
                   }
                 }
+
+                db.collection("subjects").add(widget.Class.toJson());
+
                 Navigator.of(context).popUntil((route) => route.isFirst);
               },
             ),

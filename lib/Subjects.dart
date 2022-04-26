@@ -7,4 +7,7 @@ class Subjects {
   String? year;
 
   Subjects(this.subject, this.batch, this.type);
+
+  Map<String, dynamic> toJson() =>
+      {'Subject': subject, 'Batch': batch, 'Type': type};
 }
