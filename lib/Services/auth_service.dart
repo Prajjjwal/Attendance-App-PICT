@@ -1,29 +1,19 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthService {
-  final FirebaseAuth _firebaseAuth;
+  final FirebaseAuth _auth;
 
-  AuthService(this._firebaseAuth);
+  AuthService(this._auth);
 
-  Stream<User?> get onAuthStateChanges => _firebaseAuth.idTokenChanges();
+  Stream<User?> get authStateChanges => _auth.idTokenChanges();
 
-  Future<Object> login(String email, String password) async {
+  Future<String> login(String email, String password) async {
     try {
-      await _firebaseAuth.signInWithEmailAndPassword(
-          email: email, password: password);
+      await _auth.signInWithEmailAndPassword(email: email, password: password);
       return "Logged In";
     } catch (e) {
-      return e;
-    }
-  }
-
-  Future<Object> signUp(String email, String password) async {
-    try {
-      await _firebaseAuth.signInWithEmailAndPassword(
-          email: email, password: password);
-      return "Signed Up";
-    } catch (e) {
-      return e;
+      return e.toString();
     }
   }
 }
