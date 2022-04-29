@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pict_mis/Subjects.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -7,6 +8,7 @@ class SelectBatch extends StatefulWidget {
   // ignore: non_constant_identifier_names
   final Subjects Class;
 
+  // ignore: non_constant_identifier_names
   const SelectBatch({Key? key, required this.Class}) : super(key: key);
 
   @override
@@ -18,6 +20,7 @@ class _SelectBatchState extends State<SelectBatch> {
   String? value;
   bool isVisible = false;
   FirebaseFirestore db = FirebaseFirestore.instance;
+  final user = FirebaseAuth.instance.currentUser;
 
   @override
   void initState() {
@@ -70,7 +73,14 @@ class _SelectBatchState extends State<SelectBatch> {
                   }
                 }
 
-                db.collection("subjects").add(widget.Class.toJson());
+                if (user != null) {
+                  final uid = user?.uid;
+                  await db
+                      .collection("user")
+                      .doc(uid)
+                      .collection("subjects")
+                      .add(widget.Class.toJson());
+                }
 
                 Navigator.of(context).popUntil((route) => route.isFirst);
               },

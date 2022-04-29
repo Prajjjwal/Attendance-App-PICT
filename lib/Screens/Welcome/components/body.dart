@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pict_mis/Screens/Login/login_screen.dart';
-import 'package:pict_mis/Screens/Signup/signup_screen.dart';
 import 'package:pict_mis/Screens/Welcome/components/background.dart';
 import 'package:pict_mis/components/rounded_button.dart';
-import 'package:pict_mis/constants.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:flutter_svg/svg.dart';
 
 class Body extends StatelessWidget {

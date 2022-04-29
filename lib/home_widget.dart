@@ -1,30 +1,33 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pict_mis/Subjects.dart';
 import 'package:pict_mis/Class%20Data/select_year.dart';
 import 'Subjects.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
 
-  final List<Subjects> subjectsList = [
-    Subjects("MP", "SE-3", "TH"),
-    Subjects("DSAL", "H4", "PR"),
-    Subjects("PPL", "SE-1", "TH")
-  ];
+  final user = FirebaseAuth.instance.currentUser;
 
   @override
   Widget build(BuildContext context) {
-    final newClass = new Subjects(null, null, null);
-    ;
+    final newClass = Subjects();
     return Scaffold(
       appBar: AppBar(
         title: const Text("Attendance: Wednesday, 23 March"),
         // backgroundColor: const Color(0xff6C5DDC),
       ),
-      body: ListView.builder(
-          itemCount: subjectsList.length,
-          itemBuilder: (BuildContext context, int index) =>
-              buildSubjectCard(context, index)),
+      body: StreamBuilder(
+          stream: getUsersSubjectsSnapshots(context),
+          builder: (context, snapshot) {
+            if (!snapshot.hasData) return const Text('Loading...');
+            return ListView.builder(
+                itemCount: (snapshot.data! as QuerySnapshot).docs.length,
+                itemBuilder: (BuildContext context, int index) =>
+                    buildSubjectCard(context,
+                        (snapshot.data! as QuerySnapshot).docs[index]));
+          }),
       floatingActionButton: SizedBox(
         height: 80.0,
         width: 80.0,
@@ -46,8 +49,16 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget buildSubjectCard(BuildContext context, int index) {
-    final subject = subjectsList[index];
+  Stream<QuerySnapshot> getUsersSubjectsSnapshots(BuildContext context) async* {
+    final uid = user?.uid;
+    yield* FirebaseFirestore.instance
+        .collection('user')
+        .doc(uid)
+        .collection('subjects')
+        .snapshots();
+  }
+
+  Widget buildSubjectCard(BuildContext context, DocumentSnapshot subject) {
     return Card(
         elevation: 5,
         shape: RoundedRectangleBorder(
@@ -61,7 +72,7 @@ class HomePage extends StatelessWidget {
                 child: Row(
                   children: <Widget>[
                     Text(
-                      subject.subject!,
+                      subject.get('acronym'),
                       style: const TextStyle(fontSize: 30.0),
                     ),
                   ],
@@ -79,15 +90,16 @@ class HomePage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 4.0),
               child: Row(children: <Widget>[
-                Text(subject.batch!, style: const TextStyle(fontSize: 20.0)),
+                Text(subject.get('batch'),
+                    style: const TextStyle(fontSize: 20.0)),
                 const Spacer(),
-                if (subject.type == "TH") ...[
+                if (subject.get('type') == "TH") ...[
                   const Icon(Icons.book),
                 ] else ...[
                   const Icon(Icons.computer_rounded)
                 ],
                 Text(
-                  subject.type!,
+                  subject.get('type'),
                   style: const TextStyle(fontSize: 20.0),
                 )
               ]),

@@ -5,6 +5,7 @@ import 'package:pict_mis/Class%20Data/select_subject.dart';
 class SelectYear extends StatefulWidget {
   // ignore: non_constant_identifier_names
   final Subjects Class;
+  // ignore: non_constant_identifier_names
   const SelectYear({Key? key, required this.Class}) : super(key: key);
 
   @override

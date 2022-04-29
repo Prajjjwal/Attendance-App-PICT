@@ -6,6 +6,7 @@ import '../class.dart';
 class SelectSubject extends StatefulWidget {
   // ignore: non_constant_identifier_names
   final Subjects Class;
+  // ignore: non_constant_identifier_names
   const SelectSubject({Key? key, required this.Class}) : super(key: key);
 
   @override
@@ -60,6 +61,11 @@ class _SelectSubjectState extends State<SelectSubject> {
               child: const Icon(Icons.arrow_right_alt_sharp),
               onPressed: () {
                 widget.Class.subject = value;
+                int? i, j;
+                i = value?.indexOf('(');
+                j = value?.indexOf(')');
+                String? acr = value?.substring(i! + 1, j!);
+                widget.Class.acronym = acr;
                 Navigator.push(
                     context,
                     MaterialPageRoute(

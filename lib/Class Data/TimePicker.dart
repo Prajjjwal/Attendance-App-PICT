@@ -7,6 +7,7 @@ class TimePicker extends StatefulWidget {
   // ignore: non_constant_identifier_names
   final Subjects Class;
 
+  // ignore: non_constant_identifier_names
   const TimePicker({Key? key, required this.Class}) : super(key: key);
 
   @override

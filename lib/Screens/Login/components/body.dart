@@ -114,12 +114,13 @@ class _BodyState extends State<Body> {
                         FirebaseAuth.instance
                             .signInWithEmailAndPassword(
                                 email: snap.docs[0]['email'], password: pass)
-                            .then((value) {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => HomePage()));
-                        });
+                            .then((value) => {
+                                  Navigator.pushAndRemoveUntil(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => HomePage()),
+                                      (_) => false),
+                                });
                       } else {
                         ScaffoldMessenger.of(context)
                             .showSnackBar(const SnackBar(

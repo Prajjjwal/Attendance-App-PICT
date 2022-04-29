@@ -5,9 +5,8 @@ class Subjects {
   String? type;
   String? timeSlot;
   String? year;
-
-  Subjects(this.subject, this.batch, this.type);
+  String? acronym;
 
   Map<String, dynamic> toJson() =>
-      {'Subject': subject, 'Batch': batch, 'Type': type};
+      {'subject': subject, 'batch': batch, 'type': type, 'acronym': acronym};
 }
