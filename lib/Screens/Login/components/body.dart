@@ -3,14 +3,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pict_mis/Screens/Login/components/background.dart';
 import 'package:pict_mis/components/rounded_button.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:flutter_svg/svg.dart';
 import 'package:pict_mis/components/text_field_container.dart';
 import 'package:pict_mis/constants.dart';
 import 'package:pict_mis/home_widget.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../../../Services/auth_service.dart';
 
 class Body extends StatefulWidget {
   const Body({

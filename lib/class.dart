@@ -16,6 +16,7 @@ import 'package:pict_mis/Subjects.dart';
 //   ]
 // };
 
+// ignore: non_constant_identifier_names
 var SE = {
   'Engineering Mathematics III (EM3)': 'TH',
   'Data Structure and Algorithms (DSA)': 'TH',
@@ -28,6 +29,7 @@ var SE = {
   'Code of Conduct (COC)': 'PR'
 };
 
+// ignore: non_constant_identifier_names
 var batch_th = [
   'FE-1',
   'FE-2',
@@ -46,6 +48,7 @@ var batch_th = [
   'BE-3',
   'BE-4'
 ];
+// ignore: non_constant_identifier_names
 var batch_pr = [
   'E-1',
   'F-1',
@@ -65,41 +68,28 @@ var batch_pr = [
   'H-4',
 ];
 
-var TH = [
-  '09:00am - 10:00am',
-  '10:00am - 11:00am',
-  '11:15am - 12:15pm',
-  '12:15pm - 1:15pm',
-  '02:00pm - 03:00pm',
-  '03:00pm - 04:00pm'
-];
-var PR = [
-  '09:00am - 11:00am',
-  '11:15am - 1:15pm',
-  '02:00pm - 04:00pm',
-];
+// var TH = [
+//   '09:00am - 10:00am',
+//   '10:00am - 11:00am',
+//   '11:15am - 12:15pm',
+//   '12:15pm - 1:15pm',
+//   '02:00pm - 03:00pm',
+//   '03:00pm - 04:00pm'
+// ];
+// var PR = [
+//   '09:00am - 11:00am',
+//   '11:15am - 1:15pm',
+//   '02:00pm - 04:00pm',
+// ];
 
-var SE_odd = {
+// ignore: non_constant_identifier_names
+var TE = {
   'TH': ['ABC', 'XYZ'],
   'PR': ['ABC', 'XYZ']
 };
 
-var TE_even = {
-  'TH': ['ABC', 'XYZ'],
-  'PR': ['ABC', 'XYZ']
-};
-
-var TE_odd = {
-  'TH': ['ABC', 'XYZ'],
-  'PR': ['ABC', 'XYZ']
-};
-
-var BE_even = {
-  'TH': ['ABC', 'XYZ'],
-  'PR': ['ABC', 'XYZ']
-};
-
-var BE_odd = {
+// ignore: non_constant_identifier_names
+var BE = {
   'TH': ['ABC', 'XYZ'],
   'PR': ['ABC', 'XYZ']
 };
@@ -111,13 +101,13 @@ subjectsDropDown(Subjects s) {
       item.add(key);
     });
   } else if (s.year == 'TE') {
-    TE_even.forEach((key, value) {
+    TE.forEach((key, value) {
       for (var i in value) {
         item.add(i);
       }
     });
   } else {
-    BE_even.forEach((key, value) {
+    BE.forEach((key, value) {
       for (var i in value) {
         item.add(i);
       }
@@ -127,6 +117,7 @@ subjectsDropDown(Subjects s) {
   return item;
 }
 
+// ignore: non_constant_identifier_names
 BatchDropDown(Subjects s) {
   if (s.year == 'SE') {
     if (SE[s.subject] == 'TH') {
@@ -137,13 +128,13 @@ BatchDropDown(Subjects s) {
   }
 }
 
-TimeDropDown(Subjects s) {
-  if (s.type == 'TH') {
-    return TH;
-  } else {
-    return PR;
-  }
-}
+// TimeDropDown(Subjects s) {
+//   if (s.type == 'TH') {
+//     return TH;
+//   } else {
+//     return PR;
+//   }
+// }
 
 // var classes = {
 //   'SE': {

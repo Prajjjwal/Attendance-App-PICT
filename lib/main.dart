@@ -4,7 +4,6 @@ import 'package:pict_mis/Screens/Welcome/welcome_screen.dart';
 import 'package:pict_mis/home_widget.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'constants.dart';
 
@@ -12,7 +11,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp();
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -28,11 +27,13 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: Colors.white,
           // backgroundColor: Color.fromARGB(255, 108, 93, 220),
         ),
-        home: AuthWrapper());
+        home: const AuthWrapper());
   }
 }
 
 class AuthWrapper extends StatelessWidget {
+  const AuthWrapper({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final user = context.watch<User?>();
@@ -40,7 +41,7 @@ class AuthWrapper extends StatelessWidget {
     if (user != null) {
       return HomePage();
     }
-    return WelcomeScreen();
+    return const WelcomeScreen();
   }
 }
 
