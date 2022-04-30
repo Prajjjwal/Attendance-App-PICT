@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pict_mis/Subjects.dart';
 import 'package:pict_mis/Class%20Data/select_batch.dart';
 import '../class.dart';
+import '../constants.dart';
 
 class SelectSubject extends StatefulWidget {
   // ignore: non_constant_identifier_names
@@ -26,7 +27,9 @@ class _SelectSubjectState extends State<SelectSubject> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-      appBar: AppBar(title: const Text("Select Class - Subject")),
+      appBar: AppBar(
+          title: const Text("Select Class - Subject"),
+          backgroundColor: kPrimaryColor),
       body: Center(
         child: DropdownButton<String>(
           value: value,
@@ -57,6 +60,7 @@ class _SelectSubjectState extends State<SelectSubject> {
           child: FittedBox(
             child: FloatingActionButton(
               elevation: 15.0,
+              backgroundColor: kPrimaryColor,
               // backgroundColor: Color.fromARGB(255, 134, 131, 161),
               child: const Icon(Icons.arrow_right_alt_sharp),
               onPressed: () {

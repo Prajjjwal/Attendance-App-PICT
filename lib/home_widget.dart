@@ -1,9 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:pict_mis/Screens/Login/login_screen.dart';
 import 'package:pict_mis/Subjects.dart';
 import 'package:pict_mis/Class%20Data/select_year.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'Subjects.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+
+import 'constants.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
@@ -16,7 +20,22 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Attendance: Wednesday, 23 March"),
-        // backgroundColor: const Color(0xff6C5DDC),
+        backgroundColor: kPrimaryColor,
+        elevation: 4.0,
+        actions: [
+          IconButton(
+              onPressed: () async {
+                SharedPreferences preferences =
+                    await SharedPreferences.getInstance();
+                preferences.remove('email');
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const LoginScreen()),
+                    (_) => false);
+              },
+              icon: const Icon(Icons.logout_outlined))
+        ],
       ),
       body: StreamBuilder(
           stream: getUsersSubjectsSnapshots(context),
@@ -34,7 +53,7 @@ class HomePage extends StatelessWidget {
         child: FittedBox(
           child: FloatingActionButton(
             elevation: 0.0,
-            // backgroundColor: Color.fromARGB(255, 134, 131, 161),
+            backgroundColor: kPrimaryColor,
             child: const Icon(Icons.add),
             onPressed: () {
               Navigator.push(

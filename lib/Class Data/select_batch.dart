@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pict_mis/Subjects.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../class.dart';
+import '../constants.dart';
 
 class SelectBatch extends StatefulWidget {
   // ignore: non_constant_identifier_names
@@ -30,7 +31,9 @@ class _SelectBatchState extends State<SelectBatch> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-      appBar: AppBar(title: const Text("Select Class - Batch")),
+      appBar: AppBar(
+          title: const Text("Select Class - Batch"),
+          backgroundColor: kPrimaryColor),
       body: Center(
         child: DropdownButton<String>(
           value: value,
@@ -61,6 +64,7 @@ class _SelectBatchState extends State<SelectBatch> {
           child: FittedBox(
             child: FloatingActionButton(
               elevation: 15.0,
+              backgroundColor: kPrimaryColor,
               // backgroundColor: Color.fromARGB(255, 134, 131, 161),
               child: const Icon(Icons.arrow_right_alt_sharp),
               onPressed: () async {

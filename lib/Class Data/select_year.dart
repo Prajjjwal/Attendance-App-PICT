@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pict_mis/Subjects.dart';
 import 'package:pict_mis/Class%20Data/select_subject.dart';
+import 'package:pict_mis/constants.dart';
 
 class SelectYear extends StatefulWidget {
   // ignore: non_constant_identifier_names
@@ -20,7 +21,9 @@ class _SelectYearState extends State<SelectYear> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-      appBar: AppBar(title: const Text("Select Class - Year")),
+      appBar: AppBar(
+          title: const Text("Select Class - Year"),
+          backgroundColor: kPrimaryColor),
       body: Center(
         child: DropdownButton<String>(
           isExpanded: true,
@@ -52,6 +55,7 @@ class _SelectYearState extends State<SelectYear> {
           child: FittedBox(
             child: FloatingActionButton(
               elevation: 15.0,
+              backgroundColor: kPrimaryColor,
 
               // backgroundColor: Color.fromARGB(255, 134, 131, 161),
               child: const Icon(Icons.arrow_right_alt_sharp),

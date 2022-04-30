@@ -109,16 +109,18 @@ class _BodyState extends State<Body> {
                           .get();
 
                       if (pass == snap.docs[0]['password']) {
-                        FirebaseAuth.instance
-                            .signInWithEmailAndPassword(
-                                email: snap.docs[0]['email'], password: pass)
-                            .then((value) => {
-                                  Navigator.pushAndRemoveUntil(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => HomePage()),
-                                      (_) => false),
-                                });
+                        SharedPreferences preferences =
+                            await SharedPreferences.getInstance();
+                        preferences.setString('email', snap.docs[0]['email']);
+                        // FirebaseAuth.instance
+                        //     .signInWithEmailAndPassword(
+                        //         email: snap.docs[0]['email'], password: pass)
+                        //     .then((value) => {
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(builder: (context) => HomePage()),
+                            (_) => false);
+                        // });
                       } else {
                         ScaffoldMessenger.of(context)
                             .showSnackBar(const SnackBar(

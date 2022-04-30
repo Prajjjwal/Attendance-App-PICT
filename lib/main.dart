@@ -4,46 +4,54 @@ import 'package:pict_mis/Screens/Welcome/welcome_screen.dart';
 import 'package:pict_mis/home_widget.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'constants.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences preferences = await SharedPreferences.getInstance();
+  var email = preferences.getString('email');
 
   await Firebase.initializeApp();
-  runApp(const MyApp());
+  runApp(MaterialApp(
+    theme: ThemeData(
+        primaryColor: kPrimaryColor,
+        scaffoldBackgroundColor: kPrimaryLightColor),
+    home: email == null ? const WelcomeScreen() : HomePage(),
+  ));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+// class MyApp extends StatelessWidget {
+//   const MyApp({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-        title: "PICT MIS",
-        theme: ThemeData(
-          // primarySwatch: Colors.deepPurple,
-          primaryColor: kPrimaryColor,
-          scaffoldBackgroundColor: Colors.white,
-          // backgroundColor: Color.fromARGB(255, 108, 93, 220),
-        ),
-        home: const AuthWrapper());
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//         title: "PICT MIS",
+//         theme: ThemeData(
+//           // primarySwatch: Colors.deepPurple,
+//           primaryColor: kPrimaryColor,
+//           scaffoldBackgroundColor: Colors.white,
+//           // backgroundColor: Color.fromARGB(255, 108, 93, 220),
+//         ),
+//         home: const AuthWrapper());
+//   }
+// }
 
-class AuthWrapper extends StatelessWidget {
-  const AuthWrapper({Key? key}) : super(key: key);
+// class AuthWrapper extends StatelessWidget {
+//   const AuthWrapper({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    final user = context.watch<User?>();
+//   @override
+//   Widget build(BuildContext context) {
+//     final user = context.watch<User?>();
 
-    if (user != null) {
-      return HomePage();
-    }
-    return const WelcomeScreen();
-  }
-}
+//     if (user != null) {
+//       return HomePage();
+//     }
+//     return const WelcomeScreen();
+//   }
+// }
 
 // class AuthCheck extends StatefulWidget {
 //   const AuthCheck({Key? key}) : super(key: key);
