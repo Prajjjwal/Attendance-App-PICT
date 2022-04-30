@@ -17,7 +17,7 @@ class SelectSubject extends StatefulWidget {
 class _SelectSubjectState extends State<SelectSubject> {
   List _items = [];
 
-  String? value;
+  late String value;
   bool isVisible = false;
   @override
   void initState() {
@@ -41,7 +41,7 @@ class _SelectSubjectState extends State<SelectSubject> {
             color: Colors.deepPurpleAccent,
           ),
           onChanged: (value) => setState(() {
-            this.value = value;
+            this.value = value!;
             isVisible = true;
           }),
           items: _items.map((subject) {
@@ -66,9 +66,9 @@ class _SelectSubjectState extends State<SelectSubject> {
               onPressed: () {
                 widget.Class.subject = value;
                 int? i, j;
-                i = value?.indexOf('(');
-                j = value?.indexOf(')');
-                String? acr = value?.substring(i! + 1, j!);
+                i = value.indexOf('(');
+                j = value.indexOf(')');
+                String? acr = value.substring(i + 1, j);
                 widget.Class.acronym = acr;
                 Navigator.push(
                     context,

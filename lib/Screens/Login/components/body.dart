@@ -7,7 +7,7 @@ import 'package:pict_mis/components/rounded_button.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:pict_mis/components/text_field_container.dart';
 import 'package:pict_mis/constants.dart';
-import 'package:pict_mis/home_widget.dart';
+import 'package:pict_mis/Screens/home_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Body extends StatefulWidget {
@@ -112,15 +112,17 @@ class _BodyState extends State<Body> {
                         SharedPreferences preferences =
                             await SharedPreferences.getInstance();
                         preferences.setString('email', snap.docs[0]['email']);
-                        // FirebaseAuth.instance
-                        //     .signInWithEmailAndPassword(
-                        //         email: snap.docs[0]['email'], password: pass)
-                        //     .then((value) => {
-                        Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(builder: (context) => HomePage()),
-                            (_) => false);
-                        // });
+                        FirebaseAuth.instance
+                            .signInWithEmailAndPassword(
+                                email: snap.docs[0]['email'], password: pass)
+                            .then((value) => {
+                                  Navigator.pushAndRemoveUntil(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const HomePage()),
+                                      (_) => false),
+                                });
                       } else {
                         ScaffoldMessenger.of(context)
                             .showSnackBar(const SnackBar(

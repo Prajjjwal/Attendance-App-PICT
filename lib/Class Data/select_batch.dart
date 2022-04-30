@@ -18,7 +18,7 @@ class SelectBatch extends StatefulWidget {
 
 class _SelectBatchState extends State<SelectBatch> {
   List _items = [];
-  String? value;
+  late String value;
   bool isVisible = false;
   FirebaseFirestore db = FirebaseFirestore.instance;
   final user = FirebaseAuth.instance.currentUser;
@@ -51,7 +51,7 @@ class _SelectBatchState extends State<SelectBatch> {
             );
           }).toList(),
           onChanged: (value) => setState(() {
-            this.value = value;
+            this.value = value!;
             isVisible = true;
           }),
         ),

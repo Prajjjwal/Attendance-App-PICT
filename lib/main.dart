@@ -1,24 +1,21 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pict_mis/Screens/Welcome/welcome_screen.dart';
-import 'package:pict_mis/home_widget.dart';
+import 'package:pict_mis/Screens/home_view.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'constants.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   SharedPreferences preferences = await SharedPreferences.getInstance();
   var email = preferences.getString('email');
 
-  await Firebase.initializeApp();
   runApp(MaterialApp(
     theme: ThemeData(
-        primaryColor: kPrimaryColor,
-        scaffoldBackgroundColor: kPrimaryLightColor),
-    home: email == null ? const WelcomeScreen() : HomePage(),
+        primaryColor: kPrimaryColor, scaffoldBackgroundColor: Colors.white),
+    home: email == null ? const WelcomeScreen() : const HomePage(),
   ));
 }
 
@@ -93,3 +90,4 @@ void main() async {
 //     return userAvailable ? HomePage() : WelcomeScreen();
 //   }
 // }
+// /
