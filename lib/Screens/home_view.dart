@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pict_mis/Screens/Login/login_screen.dart';
-import 'package:pict_mis/Screens/attendance_view.dart';
+import 'package:pict_mis/Screens/Attendance/attendance_view.dart';
 import 'package:pict_mis/Subjects.dart';
 import 'package:pict_mis/Class%20Data/select_year.dart';
 import 'package:shared_preferences/shared_preferences.dart';

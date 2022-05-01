@@ -23,6 +23,7 @@ var SE = {
   'Software Engineering (SE)': 'TH',
   'Microprocessor (MP)': 'TH',
   'Principles of Programming Languages (PPL)': 'TH',
+  'Project Based Learning (PBL)': 'PR',
   'Data Structure and Algorithms Laboratary (DSAL)': 'PR',
   'Microprocessor Laboratary (MPL)': 'PR',
   'Engineering Mathermatics Tutorial (TUT)': 'PR',

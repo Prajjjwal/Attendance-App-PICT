@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pict_mis/Screens/flexibleappbar.dart';
+import 'package:pict_mis/Screens/Attendance/flexibleappbar.dart';
+import 'package:pict_mis/Screens/Attendance/markAttendance_view.dart';
 import 'package:pict_mis/Subjects.dart';
 import 'package:pict_mis/constants.dart';
 
@@ -41,7 +42,8 @@ class attendance extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          // Add your onPressed code here!
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const MarkAttendance()));
         },
         label: const Text('Mark Attendance'),
         icon: const Icon(Icons.add),
