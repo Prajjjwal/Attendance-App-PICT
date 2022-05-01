@@ -18,7 +18,7 @@ class SelectBatch extends StatefulWidget {
 
 class _SelectBatchState extends State<SelectBatch> {
   List _items = [];
-  late String value;
+  String? value;
   bool isVisible = false;
   FirebaseFirestore db = FirebaseFirestore.instance;
   final user = FirebaseAuth.instance.currentUser;
@@ -68,7 +68,7 @@ class _SelectBatchState extends State<SelectBatch> {
               // backgroundColor: Color.fromARGB(255, 134, 131, 161),
               child: const Icon(Icons.arrow_right_alt_sharp),
               onPressed: () async {
-                widget.Class.batch = value;
+                widget.Class.batch = value!;
                 if (widget.Class.year == 'SE') {
                   if (SE[widget.Class.subject] == 'TH') {
                     widget.Class.type = 'TH';

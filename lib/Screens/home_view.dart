@@ -21,9 +21,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  @override
   final user = FirebaseAuth.instance.currentUser;
 
+  @override
   Widget build(BuildContext context) {
     late Subjects newClass = Subjects('N/A', 'N/A', 'N/A', 'N/A');
 
@@ -54,7 +54,11 @@ class _HomePageState extends State<HomePage> {
       body: StreamBuilder(
           stream: getUsersSubjectsSnapshots(context),
           builder: (context, snapshot) {
-            if (!snapshot.hasData) return const Text('Loading...');
+            if (!snapshot.hasData) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
             return ListView.builder(
                 itemCount: (snapshot.data! as QuerySnapshot).docs.length,
                 itemBuilder: (BuildContext context, int index) =>

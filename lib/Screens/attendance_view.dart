@@ -15,15 +15,17 @@ class attendance extends StatelessWidget {
         child: CustomScrollView(
           slivers: <Widget>[
             SliverAppBar(
-                title: const Text("Attendance: April 30, 2022"),
-                stretch: true,
-                backgroundColor: kPrimaryColor,
-                expandedHeight: 300.0,
-                flexibleSpace: FlexibleSpaceBar(
-                  background: MyFlexiableAppBar(
-                    subject: subject,
-                  ),
-                )),
+              title: const Text("Attendance: April 30, 2022"),
+              stretch: true,
+              pinned: true,
+              backgroundColor: kPrimaryColor,
+              expandedHeight: 300.0,
+              flexibleSpace: FlexibleSpaceBar(
+                background: MyFlexiableAppBar(
+                  subject: subject,
+                ),
+              ),
+            ),
             SliverFixedExtentList(
                 delegate: SliverChildListDelegate([
                   Text(subject.subject),
@@ -37,6 +39,15 @@ class attendance extends StatelessWidget {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          // Add your onPressed code here!
+        },
+        label: const Text('Mark Attendance'),
+        icon: const Icon(Icons.add),
+        backgroundColor: kPrimaryColor,
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+// import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pict_mis/Subjects.dart';
 
 class MyFlexiableAppBar extends StatelessWidget {
@@ -14,9 +14,10 @@ class MyFlexiableAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     // final double statusBarHeight = MediaQuery.of(context).padding.top;
 
+    // ignore: avoid_unnecessary_containers
     return Container(
       child: Padding(
-        padding: const EdgeInsets.only(top: 150.0, left: 12.0),
+        padding: const EdgeInsets.only(top: 120.0, left: 12.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -35,7 +36,7 @@ class MyFlexiableAppBar extends StatelessWidget {
                         fontFamily: 'Poppins',
                         fontSize: 28.0)),
                 const Padding(padding: EdgeInsets.only(left: 50.0)),
-                const Text("86",
+                const Text("10",
                     style: TextStyle(
                         color: Colors.white,
                         fontFamily: 'Poppins',
