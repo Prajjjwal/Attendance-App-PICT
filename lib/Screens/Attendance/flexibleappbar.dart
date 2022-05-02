@@ -48,8 +48,8 @@ class MyFlexiableAppBar extends StatelessWidget {
                 ),
               ],
             ),
-            const Padding(padding: EdgeInsets.only(top: 40.0)),
-            const Text('Total Lectures : 0',
+            const Padding(padding: EdgeInsets.only(top: 25.0)),
+            const Text('Total Lectures : 1',
                 style: TextStyle(
                     color: Colors.white, fontFamily: 'Poppins', fontSize: 20.0))
           ],

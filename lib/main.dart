@@ -13,6 +13,7 @@ void main() async {
   var email = preferences.getString('email');
 
   runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
     theme: ThemeData(
         primaryColor: kPrimaryColor, scaffoldBackgroundColor: Colors.white),
     home: email == null ? const WelcomeScreen() : const HomePage(),

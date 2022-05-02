@@ -1,13 +1,19 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pict_mis/Screens/Attendance/flexibleappbar.dart';
 import 'package:pict_mis/Screens/Attendance/markAttendance_view.dart';
 import 'package:pict_mis/Subjects.dart';
 import 'package:pict_mis/constants.dart';
 
-// ignore: camel_case_types
+// ignore: camel_case_types, must_be_immutable
 class attendance extends StatelessWidget {
   final Subjects subject;
-  const attendance({Key? key, required this.subject}) : super(key: key);
+  String subjectDoc;
+  attendance({Key? key, required this.subject, required this.subjectDoc})
+      : super(key: key);
+
+  final user = FirebaseAuth.instance.currentUser;
 
   @override
   Widget build(BuildContext context) {
@@ -29,12 +35,33 @@ class attendance extends StatelessWidget {
             ),
             SliverFixedExtentList(
                 delegate: SliverChildListDelegate([
-                  Text(subject.subject),
-                  Text(subject.subject),
-                  Text(subject.subject),
-                  Text(subject.subject),
-                  Text(subject.subject),
-                  Text(subject.subject),
+                  StreamBuilder(
+                      stream: getUsersAttendanceSnapshots(context),
+                      builder: (context, snapshot) {
+                        if (!snapshot.hasData) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                        if ((snapshot.data! as QuerySnapshot).docs.isEmpty) {
+                          return Center(
+                            child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: const <Widget>[
+                                  Text('No Previous data'),
+                                ]),
+                          );
+                        }
+
+                        return ListView.builder(
+                            itemCount:
+                                (snapshot.data! as QuerySnapshot).docs.length,
+                            itemBuilder: (BuildContext context, int index) =>
+                                buildAttendanceCard(
+                                  context,
+                                  (snapshot.data! as QuerySnapshot).docs[index],
+                                ));
+                      })
                 ]),
                 itemExtent: 200.00)
           ],
@@ -42,14 +69,58 @@ class attendance extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const MarkAttendance()));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      MarkAttendance(subjectDoc: subjectDoc)));
         },
         label: const Text('Mark Attendance'),
         icon: const Icon(Icons.add),
         backgroundColor: kPrimaryColor,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+    );
+  }
+
+  Stream<QuerySnapshot> getUsersAttendanceSnapshots(
+      BuildContext context) async* {
+    final uid = user?.uid;
+    // print(uid);
+    yield* FirebaseFirestore.instance
+        .collection('user')
+        .doc(uid)
+        .collection('subjects')
+        .doc(subjectDoc)
+        .collection('attendance')
+        .snapshots();
+  }
+
+  Widget buildAttendanceCard(BuildContext context, DocumentSnapshot document) {
+    return InkWell(
+      child: Card(
+          elevation: 8.0,
+          color: kPrimaryLightColor,
+          shadowColor: kPrimaryColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15.0),
+          ),
+          child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Row(
+                children: <Widget>[
+                  Text(
+                    document.id,
+                    style:
+                        const TextStyle(fontFamily: 'Poppins', fontSize: 20.0),
+                  ),
+                  const Spacer(),
+                  IconButton(
+                      onPressed: () {},
+                      icon: const Icon(Icons.keyboard_arrow_right))
+                ],
+              ))),
+      onTap: () {},
     );
   }
 }

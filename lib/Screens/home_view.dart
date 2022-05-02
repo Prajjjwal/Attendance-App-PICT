@@ -167,7 +167,8 @@ class _HomePageState extends State<HomePage> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => attendance(subject: subject)));
+                    builder: (context) => attendance(
+                        subject: subject, subjectDoc: document.reference.id)));
           },
         ));
   }
