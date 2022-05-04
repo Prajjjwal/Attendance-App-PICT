@@ -1,20 +1,32 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 // import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pict_mis/Subjects.dart';
 
 class MyFlexiableAppBar extends StatelessWidget {
   final Subjects subject;
-  const MyFlexiableAppBar({Key? key, required this.subject}) : super(key: key);
+  // ignore: prefer_typing_uninitialized_variables
+  MyFlexiableAppBar({Key? key, required this.subject}) : super(key: key);
 
-  // final double appBarHeight = 75.0;
-
-  // ignore: use_key_in_widget_constructors
+  final user = FirebaseAuth.instance.currentUser;
+  Map<String, dynamic>? fetchDoc;
+  String? count;
+  fetchDocs() async {
+    DocumentSnapshot classData = await FirebaseFirestore.instance
+        .collection('class')
+        .doc(subject.batch)
+        .get();
+    print(subject.batch);
+    if (classData.exists) {
+      fetchDoc = classData.data() as Map<String, dynamic>?;
+    }
+    count = fetchDoc?['totaStudents'];
+  }
 
   @override
   Widget build(BuildContext context) {
-    // final double statusBarHeight = MediaQuery.of(context).padding.top;
-
-    // ignore: avoid_unnecessary_containers
+    fetchDocs();
     return Container(
       child: Padding(
         padding: const EdgeInsets.only(top: 120.0, left: 12.0),
@@ -36,8 +48,8 @@ class MyFlexiableAppBar extends StatelessWidget {
                         fontFamily: 'Poppins',
                         fontSize: 28.0)),
                 const Padding(padding: EdgeInsets.only(left: 50.0)),
-                const Text("10",
-                    style: TextStyle(
+                Text('$count',
+                    style: const TextStyle(
                         color: Colors.white,
                         fontFamily: 'Poppins',
                         fontSize: 25.0)),

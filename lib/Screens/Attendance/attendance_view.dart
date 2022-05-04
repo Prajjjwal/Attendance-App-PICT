@@ -14,6 +14,7 @@ class attendance extends StatelessWidget {
       : super(key: key);
 
   final user = FirebaseAuth.instance.currentUser;
+  Map<String, dynamic>? fetchDoc, pathDoc;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class attendance extends StatelessWidget {
         child: CustomScrollView(
           slivers: <Widget>[
             SliverAppBar(
-              title: const Text("Attendance: April 30, 2022"),
+              title: const Text("Attendance: May 09, 2022"),
               stretch: true,
               pinned: true,
               backgroundColor: kPrimaryColor,
@@ -63,7 +64,7 @@ class attendance extends StatelessWidget {
                                 ));
                       })
                 ]),
-                itemExtent: 200.00)
+                itemExtent: 520.00)
           ],
         ),
       ),
@@ -98,28 +99,29 @@ class attendance extends StatelessWidget {
 
   Widget buildAttendanceCard(BuildContext context, DocumentSnapshot document) {
     return InkWell(
-      child: Card(
-          elevation: 8.0,
-          color: kPrimaryLightColor,
-          shadowColor: kPrimaryColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15.0),
-          ),
-          child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Row(
-                children: <Widget>[
-                  Text(
-                    document.id,
-                    style:
-                        const TextStyle(fontFamily: 'Poppins', fontSize: 20.0),
-                  ),
-                  const Spacer(),
-                  IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.keyboard_arrow_right))
-                ],
-              ))),
+      child: Padding(
+        padding: EdgeInsets.only(bottom: 8.0),
+        child: Card(
+            elevation: 8.0,
+            color: kPrimaryLightColor,
+            shadowColor: kPrimaryColor,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15.0),
+            ),
+            child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Row(
+                  children: <Widget>[
+                    Text(
+                      document.id,
+                      style: const TextStyle(
+                          fontFamily: 'Poppins', fontSize: 20.0),
+                    ),
+                    const Spacer(),
+                    const Icon(Icons.keyboard_arrow_right),
+                  ],
+                ))),
+      ),
       onTap: () {},
     );
   }
