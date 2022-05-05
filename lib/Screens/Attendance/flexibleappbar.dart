@@ -11,7 +11,7 @@ class MyFlexiableAppBar extends StatelessWidget {
 
   final user = FirebaseAuth.instance.currentUser;
   Map<String, dynamic>? fetchDoc;
-  String? count;
+  var count;
   fetchDocs() async {
     DocumentSnapshot classData = await FirebaseFirestore.instance
         .collection('class')
@@ -21,7 +21,8 @@ class MyFlexiableAppBar extends StatelessWidget {
     if (classData.exists) {
       fetchDoc = classData.data() as Map<String, dynamic>?;
     }
-    count = fetchDoc?['totaStudents'];
+    count = fetchDoc?['totalStudents'];
+    print(count);
   }
 
   @override

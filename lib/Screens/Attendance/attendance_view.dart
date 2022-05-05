@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:pict_mis/Screens/Attendance/attendance_data.dart';
 import 'package:pict_mis/Screens/Attendance/flexibleappbar.dart';
 import 'package:pict_mis/Screens/Attendance/markAttendance_view.dart';
 import 'package:pict_mis/Subjects.dart';
@@ -122,7 +123,10 @@ class attendance extends StatelessWidget {
                   ],
                 ))),
       ),
-      onTap: () {},
+      onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => viewAttendance(document: document))),
     );
   }
 }
