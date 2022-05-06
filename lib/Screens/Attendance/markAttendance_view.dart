@@ -153,22 +153,6 @@ class _MarkAttendanceState extends State<MarkAttendance> {
                               borderSide: BorderSide(
                                   color: kPrimaryColor, width: 2.0))),
                       onSubmitted: (string) {
-                        // fetchDoc() async {
-                        // enter here the path , from where you want to fetch the doc
-                        // DocumentSnapshot pathData = await FirebaseFirestore
-                        //     .instance
-                        //     .collection('class')
-                        //     .doc('G-3')
-                        //     .get();
-
-                        // if (pathData.exists) {
-                        //   Map<String, dynamic>? fetchDoc =
-                        //       pathData.data() as Map<String, dynamic>?;
-
-                        //Now use fetchDoc?['KEY_names'], to access the data from firestore, to perform operations , for eg
-                        // var name = fetchDoc?['213$string'];
-
-                        // setState(() {});  // use only if needed
                         setState(() {
                           var tag = '213$string ${fetchDoc?['213$string']}';
                           _tags.add(Item(title: tag));

@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pict_mis/constants.dart';
-import 'package:intl/intl.dart';
 
 class viewAttendance extends StatefulWidget {
   DocumentSnapshot document;
@@ -113,7 +112,7 @@ class _viewAttendanceState extends State<viewAttendance> {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 300),
         // padding: const EdgeInsets.only(left: 10.0),
-        height: 450.0,
+        height: 350.0,
         width: 350.0,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(30.0), color: Colors.blue),
@@ -183,7 +182,7 @@ class _viewAttendanceState extends State<viewAttendance> {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 300),
         // padding: const EdgeInsets.only(left: 20.0),
-        height: 450.0,
+        height: 350.0,
         width: 350.0,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(30.0),
