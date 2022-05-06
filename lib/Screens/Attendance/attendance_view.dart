@@ -15,7 +15,6 @@ class attendance extends StatelessWidget {
       : super(key: key);
 
   final user = FirebaseAuth.instance.currentUser;
-  Map<String, dynamic>? fetchDoc, pathDoc;
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +29,9 @@ class attendance extends StatelessWidget {
               backgroundColor: kPrimaryColor,
               expandedHeight: 300.0,
               flexibleSpace: FlexibleSpaceBar(
-                background: MyFlexiableAppBar(
+                background: MyFlexibleAppbar(
                   subject: subject,
+                  subjectDoc: subjectDoc,
                 ),
               ),
             ),
@@ -126,7 +126,8 @@ class attendance extends StatelessWidget {
       onTap: () => Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => viewAttendance(document: document))),
+              builder: (context) =>
+                  viewAttendance(document: document, subjectDoc: subjectDoc))),
     );
   }
 }

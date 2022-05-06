@@ -1,28 +1,48 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-// import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pict_mis/Subjects.dart';
 
-class MyFlexiableAppBar extends StatelessWidget {
+class MyFlexibleAppbar extends StatefulWidget {
   final Subjects subject;
-  // ignore: prefer_typing_uninitialized_variables
-  MyFlexiableAppBar({Key? key, required this.subject}) : super(key: key);
+  String subjectDoc;
 
+  MyFlexibleAppbar({Key? key, required this.subject, required this.subjectDoc})
+      : super(key: key);
+
+  @override
+  State<MyFlexibleAppbar> createState() => _MyFlexibleAppbarState();
+}
+
+class _MyFlexibleAppbarState extends State<MyFlexibleAppbar> {
   final user = FirebaseAuth.instance.currentUser;
   Map<String, dynamic>? fetchDoc;
-  var count;
+  var db = FirebaseFirestore.instance;
+  var count, lectureCount;
   fetchDocs() async {
     DocumentSnapshot classData = await FirebaseFirestore.instance
         .collection('class')
-        .doc(subject.batch)
+        .doc(widget.subject.batch)
         .get();
-    print(subject.batch);
     if (classData.exists) {
       fetchDoc = classData.data() as Map<String, dynamic>?;
     }
-    count = fetchDoc?['totalStudents'];
-    print(count);
+    db
+        .collection('user')
+        .doc(user?.uid)
+        .collection('subjects')
+        .doc(widget.subjectDoc)
+        .collection('attendance')
+        .get()
+        .then((snap) => {
+              lectureCount = snap.size // will return the collection size
+            });
+
+    if (mounted) {
+      setState(() {
+        count = fetchDoc?['totalStudents'];
+      });
+    }
   }
 
   @override
@@ -34,7 +54,7 @@ class MyFlexiableAppBar extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(subject.subject,
+            Text(widget.subject.subject,
                 style: const TextStyle(
                     color: Colors.white,
                     fontFamily: 'Poppins',
@@ -43,7 +63,7 @@ class MyFlexiableAppBar extends StatelessWidget {
             const Padding(padding: EdgeInsets.only(top: 20.0)),
             Row(
               children: <Widget>[
-                Text(subject.batch,
+                Text(widget.subject.batch,
                     style: const TextStyle(
                         color: Colors.white,
                         fontFamily: 'Poppins',
@@ -62,8 +82,8 @@ class MyFlexiableAppBar extends StatelessWidget {
               ],
             ),
             const Padding(padding: EdgeInsets.only(top: 25.0)),
-            const Text('Total Lectures : 1',
-                style: TextStyle(
+            Text('Total Lectures : $lectureCount',
+                style: const TextStyle(
                     color: Colors.white, fontFamily: 'Poppins', fontSize: 20.0))
           ],
         ),
