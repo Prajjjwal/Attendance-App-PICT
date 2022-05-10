@@ -214,6 +214,7 @@ class _MarkAttendanceState extends State<MarkAttendance> {
         onPressed: () {
           markingAttendance();
           Navigator.pop(context);
+          // Navigator.pop(context);
         },
         label: const Text('Submit Attendance'),
         icon: const Icon(Icons.done_all),

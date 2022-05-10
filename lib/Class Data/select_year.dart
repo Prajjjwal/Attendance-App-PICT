@@ -14,7 +14,7 @@ class SelectYear extends StatefulWidget {
 }
 
 class _SelectYearState extends State<SelectYear> {
-  final items = ['FE', 'SE', 'TE', 'BE'];
+  final items = ['SE', 'TE', 'BE'];
 
   String? value;
   bool isVisible = false;

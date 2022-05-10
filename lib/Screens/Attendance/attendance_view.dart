@@ -28,7 +28,7 @@ class attendance extends StatelessWidget {
               stretch: true,
               pinned: true,
               backgroundColor: kPrimaryColor,
-              expandedHeight: 300.0,
+              expandedHeight: 330.0,
               flexibleSpace: FlexibleSpaceBar(
                 background: MyFlexibleAppbar(
                   subject: subject,
@@ -40,8 +40,8 @@ class attendance extends StatelessWidget {
                   onPressed: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: ((context) =>
-                              CheckAttendance(subjectDoc: subjectDoc)))),
+                          builder: ((context) => CheckAttendance(
+                              subjectDoc: subjectDoc, subject: subject)))),
                   icon: const Icon(Icons.info_outline_rounded),
                   tooltip: 'Check Attendance',
                 )
@@ -113,7 +113,7 @@ class attendance extends StatelessWidget {
   Widget buildAttendanceCard(BuildContext context, DocumentSnapshot document) {
     return InkWell(
       child: Padding(
-        padding: EdgeInsets.only(bottom: 8.0),
+        padding: const EdgeInsets.only(bottom: 8.0),
         child: Card(
             elevation: 8.0,
             color: kPrimaryLightColor,
